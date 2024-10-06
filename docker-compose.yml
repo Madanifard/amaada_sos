@@ -1,0 +1,31 @@
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./:/app
+    ports:
+      - ${DJANGO_MAP_PORT}:8000
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    networks:
+      - sos-network
+
+  db:
+    image: postgres:latest
+    volumes:
+      - postgres_data_sos:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_MAP_PORT}:5432
+    env_file:
+      - ./.env
+    networks:
+      - sos-network
+
+volumes:
+  postgres_data_sos:
+
+networks:
+  sos-network:
