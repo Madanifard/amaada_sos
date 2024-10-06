@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',  # setting ==> REST_FRAMEWORK
     'drf_spectacular',  # settings ==> SPECTACULAR_SETTINGS
+    'insurance',
 ]
 
 MIDDLEWARE = [
