@@ -1,0 +1,6 @@
+Django
+python-dotenv
+psycopg
+djangorestframework
+markdown
+drf-spectacular
