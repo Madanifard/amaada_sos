@@ -1,0 +1,1 @@
+from .insured import Insured

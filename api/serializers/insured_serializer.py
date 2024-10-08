@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from insurance.models.insured import Insured
+from insured.models.insured import Insured
 
 class InsuredSerializer(serializers.ModelSerializer):
     class Meta:

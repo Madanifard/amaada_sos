@@ -1,7 +1,8 @@
 from django.db import models
-from .person import Person
-from .insurance import Insurance
-from .insured import Insured
+from person.models.person import Person
+from insurance.models.insurance import Insurance
+from insured.models.insured import Insured
+
 
 class InsurancePolicy(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)

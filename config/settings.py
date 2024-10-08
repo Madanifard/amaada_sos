@@ -46,6 +46,11 @@ INSTALLED_APPS = [
     'rest_framework',  # setting ==> REST_FRAMEWORK
     'drf_spectacular',  # settings ==> SPECTACULAR_SETTINGS
     'insurance',
+    'insured',
+    'plan',
+    'person',
+    'insurance_policy',
+    
 ]
 
 MIDDLEWARE = [
