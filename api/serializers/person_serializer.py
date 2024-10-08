@@ -1,8 +1,8 @@
 from rest_framework import serializers
 from person.models.person import Person
-from insurance.validators.email_validator import EmailValidator
-from insurance.validators.national_code_validator import NationalCodeValidator
-from insurance.validators.name_validator import NameValidator
+from validators.email_validator import EmailValidator
+from validators.national_code_validator import NationalCodeValidator
+from validators.name_validator import NameValidator
 
 
 class PersonSerializer(serializers.ModelSerializer):
