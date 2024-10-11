@@ -23,7 +23,6 @@ class InsurancePolicySerializer(serializers.ModelSerializer):
         insurance_data = validated_data.pop('insurance')
         insured_data = validated_data.pop('insured')
 
-        
         person, _ = Person.objects.get_or_create(**person_data)
         insurance, _ = Insurance.objects.get_or_create(**insurance_data)
         insured, _ = Insured.objects.get_or_create(**insured_data)

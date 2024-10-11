@@ -4,9 +4,9 @@ from django.db import models
 class Person(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
+    email = models.EmailField()
     mobile_number = models.CharField(max_length=20)
-    national_code = models.CharField(max_length=10, unique=True)
+    national_code = models.CharField(max_length=10)
     birth_date = models.DateField()
     father_name = models.CharField(max_length=100, blank=True)
     place_of_issue = models.CharField(max_length=100)

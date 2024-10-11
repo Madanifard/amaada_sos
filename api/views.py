@@ -1,24 +1,29 @@
-from drf_spectacular.utils import extend_schema
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny
-from .serializers.full_data_serializer import FullDataSerializer
+from .serializers.context_serializer import ContextSerializer
+from insurance.models.insurance import Insurance
 
 
-class FullDataAPIView(APIView):
+class InsuranceAPIView(APIView):
 
     permission_classes = [AllowAny]
 
-    @extend_schema(
-        summary="Create Full Data",
-        description="This API allows the user to send a large JSON with nested data for plan, person, insurance policy, etc., and stores the validated data in the database.",
-        request=FullDataSerializer,
-        responses={201: dict, 400: dict},
-    )
     def post(self, request):
-        serializer = FullDataSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"message": "Data successfully saved"}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        company_unique_id = request.data['insurance_policy']['insurance']['unique_id']
+        insurance = Insurance.find_by_unique_id(company_unique_id)
+        if insurance:
+            context_serializer = ContextSerializer(company_name=insurance.name)
+            serializer = context_serializer.get_serializer(request.data)
+            serializer.context['company_name'] = insurance.name
+
+            if context_serializer.is_valid():
+                context_serializer.save()
+                return Response({"message": "Data successfully saved"},
+                                status=status.HTTP_201_CREATED)
+            else:
+                return Response(context_serializer.errors,
+                                status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'message': 'Insurance Info Invalid'})
